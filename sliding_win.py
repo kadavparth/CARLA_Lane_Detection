@@ -36,7 +36,7 @@ def get_lane_line_indices_sliding_window(warped_frame,histogram):
     
     frame_sliding_window = warped_frame.copy()
     nwindows = 12
-    margin = 65
+    margin = 55
     minpix = 50
     window_height = int(warped_frame.shape[0]/nwindows)
     
