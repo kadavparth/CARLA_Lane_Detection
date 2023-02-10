@@ -66,9 +66,17 @@ class Listener:
                 cv2.line(blank_img,(int(midx[i]), int(ploty[i])), (int(midx[i]), int(ploty[i])), (255,0,0),2)
 
             newwarp = cv2.warpPerspective(out_img, Minv, (800,800))
-            newwarp1 = cv2.addWeighted(newwarp, 0.5, img, 0.7,0)
+            img = cv2.resize(img, (500,500))
+            newwarp = cv2.resize(newwarp, (500,500))
 
+            newwarp1 = cv2.addWeighted(newwarp, 0.5, img, 0.7,0)
+            newwarp1 = cv2.resize(newwarp1, (500,500))
+            
             lane_proj = np.concatenate([img,newwarp1],axis=1)
+
+            out_img = cv2.resize(out_img, (500,500))
+            blank_img = cv2.resize(blank_img, (500,500))
+
             out_img1 = np.concatenate([out_img, blank_img],axis=1)
 
             final_img = np.concatenate([lane_proj,out_img1],axis=0)
