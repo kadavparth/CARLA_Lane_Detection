@@ -36,6 +36,7 @@ class Listener:
             # masked_roi_img = self.roi_mask(sxbinary)
             
             warped, Minv, unwarped = win.Perspective(sxbinary)
+
             warped = self.contors(warped)
 
             hist = win.calc_hist(warped)
@@ -81,8 +82,9 @@ class Listener:
 
             final_img = np.concatenate([lane_proj,out_img1],axis=0)
 
-            cv2.imshow('Warped Sliding Window + Polyfit Lane Lines', final_img)
-            cv2.imshow('frame',frame_sliding_window)
+            cv2.imshow('frame',blank_img)
+            # cv2.imshow('Warped Sliding Window + Polyfit Lane Lines', final_img)
+            # cv2.imshow('frame',frame_sliding_window)
             cv2.waitKey(1)
 
         except CvBridgeError as e:
