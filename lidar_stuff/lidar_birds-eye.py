@@ -4,24 +4,10 @@ import rospy
 import cv2 
 from sensor_msgs.msg import Image, PointCloud2
 import numpy as np 
-from carla_msgs.msg import CarlaActorList
 import matplotlib.pyplot as plt
-import carla 
 from skimage.io import imshow
-import queue
-import threading 
 
 rospy.init_node('Carla_lidar_viewer', anonymous=True)
-
-client = carla.Client('localhost', 2000)
-client.set_timeout(2.0)
-world = client.get_world()
-
-actors = rospy.wait_for_message('carla/actor_list', CarlaActorList)
-
-for actor in actors.actors:
-    if actor.rolename == 'lidar':
-        lidar = world.get_actor( actor.id )
 
 class Listener: 
 
@@ -70,7 +56,6 @@ class Listener:
 
 
 if __name__ == "__main__":
-
 
     topic_name = '/carla/ego_vehicle/lidar'
     data_class = PointCloud2 
